@@ -24,6 +24,9 @@ used and the block is predicted to be re-referenced in the nearimmediate future.
 Static Re-reference Interval Prediction (SRRIP).SRRIP uses M-bits per cache block to store one of 2M possible Rereference Prediction Values (RRPV). RRIP dynamically learns rereference information for each block in the cache access pattern. Like NRU, an RRPV of zero implies that a cache block is predicted to be re-referenced in the near-immediate future while RRPV of saturation
 (i.e., 2M–1) implies that a cache block is predicted to be re-referenced in the distant future. Quantitatively, RRIP predicts that blocks with small RRPVs are re-referenced sooner than blocks with large RRPVs. When M=1, RRIP is identical to the NRU replacement policy. When M>1, RRIP enables intermediate re-reference intervals that are greater than a near-immediate re-reference interval but less than a distant re-reference interval. 
 
+<img width="550" alt="image" src="https://github.com/Rajat5991/Static-Re-Reference-Interval-Prediction-SRRIP-/assets/154459536/c31a2904-0ffa-490e-a089-35092b9cc662">
+
+
 NOTE: SRRIP policy is created in rrip_repl file -> zsim/src/rrip_repl
 
 #  System Requirement
