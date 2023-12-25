@@ -45,7 +45,7 @@ instructions. For PARSEC benchmarks, simulations will run the whole parallel pha
 1. Use runscript to run the benchmarks
 Note: The config files and runscript must be in the /zsim.
 
-$ ./runscript <suite> <benchmark> <repl policy>
+   $ ./runscript <suite> <benchmark> <repl policy>
 
 Example: $ ./runscript SPEC bzip2 LRU
 
