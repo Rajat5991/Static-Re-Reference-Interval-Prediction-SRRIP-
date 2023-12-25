@@ -4,6 +4,8 @@ shared L3 caches in zsim; and compare its performance to other policies.
 
 RRIP finds a victim block that is not recently used in a set for cache replacement. When replace a new block in the cache, its recency value is not set to near-immediate re-reference interval (Most recently used) or distant re-reference interval (Least recently used). Instead, it is set to a long re-reference interval between the two extremes. 
 
+Predicting that every cache insertion will be re-referenced very soon hurts cache performance in mixed access patterns. This happens because scan blocks use up cache space without providing any cache hits. On the other hand, always predicting a distant re-reference interval significantly reduces cache performance for patterns that mostly involve near-immediate re-references. Without external information on the re-reference interval for each missing cache block, the Not Recently Used (NRU) approach cannot identify and keep non-scan blocks in mixed access patterns.
+
 Paper Link: https://dl.acm.org/doi/pdf/10.1145/1815961.1815971
 
 # LRU - Least Recently Used
