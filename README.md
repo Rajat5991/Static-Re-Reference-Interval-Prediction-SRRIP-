@@ -44,8 +44,11 @@ Run an representative simpoint of each SPEC CPU2006 benchmark for 100 million
 instructions. For PARSEC benchmarks, simulations will run the whole parallel phase.
 1. Use runscript to run the benchmarks
 Note: The config files and runscript must be in the /zsim.
+
 $ ./runscript <suite> <benchmark> <repl policy>
+
 Example: $ ./runscript SPEC bzip2 LRU
-2. Check the results in outputs directory (zsim.out). In <benchmark>.log we may see
+
+3. Check the results in outputs directory (zsim.out). In <benchmark>.log we may see
 one of the following errors.
 
