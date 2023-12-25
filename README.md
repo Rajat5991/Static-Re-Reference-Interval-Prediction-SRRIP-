@@ -26,6 +26,31 @@ Static Re-reference Interval Prediction (SRRIP).SRRIP uses M-bits per cache bloc
 
 NOTE: SRRIP policy is created in rrip_repl file -> zsim/src/rrip_repl
 
+#  System Requirement
+
+Linux operating system is required in order to use the zsim. Do not use Cygwin, Mac OS X is not supported.
+
+# Environemnt setup
+
+Everytime you want to build or run zsim, you need to setup the environment variables first.
+
+```
+$ source setup_env
+```
+
+# Compile zsim
+
+```
+$ cd zsim
+$ scons -j4
+```
+
+# Launch a test to run
+
+```
+./build/opt/zsim tests/simple.cfg
+```
+
 # Procedure
 Implement a SRRIP-HP cache replacement policy in zsim. Run simulations to compare the performance to other policies using SPEC CPU2006 on single-core and PARSEC benchmarks on multicore
 processor.
