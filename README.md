@@ -82,3 +82,18 @@ Example: $ ./runscript SPEC bzip2 LRU
 3. Check the results in outputs directory (zsim.out). In <benchmark>.log we may see
 one of the following errors.
 
+# Result Analysis
+
+<img width="619" alt="image" src="https://github.com/Rajat5991/Static-Re-Reference-Interval-Prediction-SRRIP-/assets/154459536/773039e2-8606-4190-b10d-a04644dc2453">
+
+<img width="625" alt="image" src="https://github.com/Rajat5991/Static-Re-Reference-Interval-Prediction-SRRIP-/assets/154459536/bc134755-ab8e-4c57-bdcc-40153fdb547b">
+
+Comparing IPC and MPKI (misses per thousand instructions) across benchmarks reveals nuanced differences between LRU and SRRIP cache replacement policies. In Parsec benchmarks, like bodytrack and fluidanimate, both policies show similar results. In Spec CPU2006 benchmarks (bzip2, gcc, hmmer), performance is largely similar under both policies, with minor variations in IPC and MPKI values. Notable differences surface in soplex and sjeng, where SRRIP slightly improves IPC and lowers MPKI. Conversely, milc and lbm slightly favor the LRU policy.
+
+<img width="620" alt="image" src="https://github.com/Rajat5991/Static-Re-Reference-Interval-Prediction-SRRIP-/assets/154459536/1949b523-b719-431f-9d5b-2c45857cf889">
+
+<img width="523" alt="image" src="https://github.com/Rajat5991/Static-Re-Reference-Interval-Prediction-SRRIP-/assets/154459536/b8a167b4-9464-4f10-95bc-0ca9fcf792b4">
+
+
+
+
