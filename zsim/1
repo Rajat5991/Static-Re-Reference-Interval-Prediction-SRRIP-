@@ -1,0 +1,85 @@
+#ifndef RRIP_REPL_H_
+#define RRIP_REPL_H_
+
+#include "repl_policies.h"
+
+// Static RRIP
+class SRRIPReplPolicy : public ReplPolicy {
+    protected:
+        // add class member variables here
+           uint32_t numlines;
+           uint32_t RPVMAX; // MAX SRRIP value that we want to associate with the line in cache
+           uint32_t* srrip_value;
+           uint32_t* cache_array;
+           uint32_t* valid_bit;
+           uint32_t replacement_flag;
+
+    public:
+        // add member methods here, refer to repl_policies.h
+        //  Constructor created from init.cpp
+      
+           explicit SRRIPReplPolicy(uint32_t _numlines, uint32_t _RPVMAX) : numlines(_numlines), RPVMAX(_RPVMAX) 
+                 {
+                    srrip_value = gm_calloc<uint32_t>(numlines);// associating SRRIP value with each lines in cache
+                    cache_array = gm_calloc<uint32_t>(numlines); // creating cache array of size equal to number of lines
+                    valid_bit = gm_calloc<uint32_t>(numlines); // associating SRRIP value with each lines in cache
+                     for(uint32_t i = 0; i <= numlines; i++)
+                      {
+                        srrip_value[i] = RPVMAX; // initializing each cache line with MAX SRRIP
+                        valid_bit[i] = 0; // initializaing all the cache line Tag as an nvalid
+                      }
+                 }
+           // Deconstructor 
+             ~SRRIPReplPolicy() {
+                gm_free(cache_array);
+                gm_free(srrip_value);
+             }
+
+          void update(uint32_t id, const MemReq* req) {
+            
+               if(~valid_bit[id] || replacement_flag){
+                  srrip_value[id] = RPVMAX - 1;
+                  replacement_flag = 0;   // reset replacement_flag
+                }
+               else
+                {
+                  srrip_value[id] = 0; //Hit
+                }
+            }
+
+         template <typename C> inline uint32_t rank(const MemReq* req, C cands) {
+            uint32_t replacement_candidate_indx = -1; // initialing replacement_candidate_indx
+            uint64_t srrip_replacement_score = 3; //srrip_replacement_score
+            while(1) // loop it until found first srrip_value equals to 3
+            {
+             for (auto ci = cands.begin(); ci != cands.end(); ci.inc()) {
+                if(srrip_value[ci] == 3) // search for first srrip_value == 3
+                 {
+                   replacement_candidate_indx = ci ;
+                   replacement_flag = 1; //set replacement_flag
+                   return replacement_candidate_indx;  //Found first 3 in an array replace this index block with new block       
+                }
+                 
+             }
+              increment_srrip(C cands) // if not found first srrip value equals to 3 increment srrip_value of all the lines
+            }
+           }
+      
+        template <typename C> inline void increment_srrip(C cands_inc){
+              for (auto cidx = cands_inc.begin(); cidx != cands_inc.end(); cidx.inc()) {
+               srrip_value[cidx]++;
+              }
+              
+           }
+
+        void replaced(uint32_t id) {
+            valid_bit[id] = 1; // mark block as valid block after replacement
+        }
+             
+           
+    
+ 
+
+        //DECL_RANK_BINDINGS;
+};
+#endif // RRI\P_REPL_H_
