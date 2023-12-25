@@ -25,3 +25,27 @@ Static Re-reference Interval Prediction (SRRIP).SRRIP uses M-bits per cache bloc
 (i.e., 2M–1) implies that a cache block is predicted to be re-referenced in the distant future. Quantitatively, RRIP predicts that blocks with small RRPVs are re-referenced sooner than blocks with large RRPVs. When M=1, RRIP is identical to the NRU replacement policy. When M>1, RRIP enables intermediate re-reference intervals that are greater than a near-immediate re-reference interval but less than a distant re-reference interval. 
 
 NOTE: SRRIP policy is created in rrip_repl file -> zsim/src/rrip_repl
+
+# Procedure
+Implement a SRRIP-HP cache replacement policy in zsim. Run simulations to compare the performance to other policies using SPEC CPU2006 on single-core and PARSEC benchmarks on multicore
+processor.
+
+   Run the following benchmarks using ZSim
+   
+   SPEC CPU2006 Benchmarks (Single-threaded)
+   
+    Integer bzip2, gcc, mcf, hmmer, sjeng, libquantum, xalancbmk, Floating Point milc, cactusADM, leslie3d, namd, soplex, calculix, lbm
+    
+   PARSEC Benchmarks (Multi-threaded)
+   
+    blackschoels, bodytrack, canneal, dedup, fluidanimate, freqmine, streamcluster, swaptions, x264
+    
+Run an representative simpoint of each SPEC CPU2006 benchmark for 100 million
+instructions. For PARSEC benchmarks, simulations will run the whole parallel phase.
+1. Use hw4runscript to run the benchmarks
+Note: The config files and runscript must be in the /zsim.
+$ ./runscript <suite> <benchmark> <repl policy>
+Example: $ ./runscript SPEC bzip2 LRU
+2. Check the results in outputs directory (zsim.out). In <benchmark>.log we may see
+one of the following errors.
+
